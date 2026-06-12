@@ -6,3 +6,8 @@
 # Adobe source files (keep compiled exports only)
 **/*.ai
 **/*.pdf
+
+# Video files (too large for GitHub)
+**/*.mp4
+**/*.mov
+**/*.avi
