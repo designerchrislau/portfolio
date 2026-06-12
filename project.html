@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Chris Lau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --off-white: #F0EDE8;
+    --accent: #C8FF00;
+    --mid: #2A2A2A;
+    --grey: #888;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2.5rem;
+    background: rgba(8,8,8,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .project-hero {
+    padding-top: 7rem;
+    padding-bottom: 0;
+  }
+
+  .hero-img {
+    width: 100%;
+    max-height: 70vh;
+    object-fit: cover;
+    display: block;
+    background: var(--mid);
+  }
+
+  /* ── CONTENT WRAPPER ── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2.5rem 6rem;
+  }
+
+  /* ── PROJECT HEADER ── */
+  .project-header {
+    padding: 3.5rem 0 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .tag-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .tag {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(200,255,0,0.3);
+    padding: 0.35rem 0.8rem;
+  }
+
+  .meta-item {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+  }
+
+  .meta-item strong {
+    color: var(--off-white);
+    font-weight: 600;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  .section-eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--off-white);
+    margin-bottom: 1.2rem;
+    line-height: 1.15;
+  }
+
+  .section-body {
+    color: var(--grey);
+    font-size: 1rem;
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .section-body p + p { margin-top: 1rem; }
+
+  .section-body strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* bullet list inside sections */
+  .bullet-list {
+    list-style: none;
+    margin-top: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .bullet-list li {
+    display: flex;
+    gap: 0.8rem;
+    color: var(--grey);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .bullet-list li::before {
+    content: '—';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+
+  /* inline image */
+  .section-img {
+    width: 100%;
+    display: block;
+    margin: 2rem 0;
+    background: var(--mid);
+    object-fit: cover;
+  }
+
+  /* two-col image pair */
+  .img-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .img-pair img {
+    width: 100%;
+    object-fit: cover;
+    background: var(--mid);
+  }
+
+  /* tools row */
+  .tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+
+  .tool-chip {
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--grey);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.4rem 0.9rem;
+  }
+
+  /* callout box */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.5rem;
+    background: rgba(200,255,0,0.04);
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    color: var(--off-white);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+
+  /* ── NAV BETWEEN PROJECTS ── */
+  .project-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1rem;
+    padding: 3rem 0 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 1rem;
+  }
+
+  .proj-nav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.5rem;
+    background: var(--mid);
+    text-decoration: none;
+    transition: background 0.2s;
+    min-width: 0;
+  }
+
+  .proj-nav-btn:hover { background: #333; }
+
+  .proj-nav-direction {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .proj-nav-title {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--off-white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .proj-nav-btn.next { text-align: right; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .footer-copy { font-size: 0.75rem; color: rgba(136,136,136,0.5); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .content { padding: 0 1.2rem 4rem; }
+    .img-pair { grid-template-columns: 1fr; }
+    .project-nav { flex-direction: column; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Chris Lau</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- content injected by JS -->
+<div id="page-root"></div>
+
+<footer>
+  <span class="footer-name">Chris Lau</span>
+  <span class="footer-copy">© 2025 Chris Lau. All rights reserved.</span>
+</footer>
+
+<script>
+// ── SHARED PROJECT DATA (keep in sync with index.html) ──
+const PROJECTS = [
+  {
+    id: "christmas-campaign",
+    title: "Christmas Campaign — AI-Generated Visual Production",
+    subtitle: "AI Image Generation · Campaign Design · Adobe Creative Suite · Genspark · 8K Production",
+    img: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/e0a137249146175.6a01bd40d422c.png",
+    thumb: "https://mir-s3-cdn-cf.behance.net/projects/404/f761c8249146175.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png",
+    tags: ["AI Production", "Branding"],
+    year: "2025",
+    role: "Design Lead",
+    tools: ["Genspark", "Adobe Photoshop", "Adobe Illustrator", "Adobe Premiere Pro"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "AI as a production tool, not a shortcut.",
+        body: `For Zyphor's Christmas campaign, I explored AI-generated imagery as a practical alternative to traditional product photography — with the goal of producing premium-quality campaign visuals at a fraction of the time and cost. The result was a set of 8K high-resolution images used across the live Zyphor website Christmas campaign, generated using Genspark and refined with Adobe tools.`,
+      },
+      {
+        eyebrow: "The Challenge",
+        heading: "Premium visuals on a startup budget.",
+        body: `Premium footwear brands rely heavily on high-quality visual production to communicate brand value. Traditional photography for a seasonal campaign — studio hire, photographer, lighting, post-production — is both time-intensive and expensive, particularly for an early-stage startup operating with a lean budget.\n\nThe brief was to produce Christmas campaign visuals that felt consistent with Zyphor's premium, futuristic brand identity without the cost and lead time of a traditional photoshoot.`,
+      },
+      {
+        eyebrow: "Results",
+        heading: "Delivered on time, on brief, under budget.",
+        body: `The final campaign visuals were delivered and published on the Zyphor website for the Christmas campaign — meeting the brief on quality, timeline, and budget. The AI-assisted workflow reduced visual production time significantly compared to a traditional photography approach.`,
+      },
+      {
+        eyebrow: "Honest Assessment",
+        heading: "The pain points of AI video.",
+        body: `Alongside image generation, I explored whether AI video generation could extend the campaign into motion content. This is where the current limitations of AI tools became clear:`,
+        bullets: [
+          "Consistency between frames — AI video generation struggles to maintain visual consistency, causing subjects, lighting, and brand elements to shift or distort mid-clip.",
+          "Brand control — Video generation offers far less control over output than image prompting. Achieving a specific brand-aligned look consistently was not reliably achievable.",
+          "Time and cost — High-quality AI video generation requires significant processing time and cost, eroding the efficiency advantage that makes AI image generation compelling.",
+        ],
+      },
+      {
+        eyebrow: "Conclusion",
+        heading: "A genuine tool, not a gimmick.",
+        body: `For campaign imagery, AI generation is a genuinely viable professional tool today. For brand video, the technology is not yet at a stage where it can replace traditional motion production for premium brands.\n\nAI image generation is now a legitimate part of the professional design workflow — not a shortcut, but a tool that requires the same creative direction, brand judgement, and refinement skills as any other production method. The designer's role shifts from pixel-pushing to prompt craft, curation, and finishing — but the creative and strategic thinking remains entirely human.`,
+        callout: "The designer's role shifts — but the creative thinking remains entirely human.",
+      },
+    ],
+  },
+  {
+    id: "zyphor-website",
+    title: "Zyphor Website",
+    subtitle: "Web Design · UI/UX · Graphic Design",
+    img: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/a33527247773297.69e23ead9f6fa.png",
+    thumb: "https://mir-s3-cdn-cf.behance.net/projects/404/08f165247773297.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png",
+    tags: ["UX/UI", "Web Design"],
+    year: "2026",
+    role: "Design Lead",
+    tools: ["Figma", "Adobe Photoshop", "Adobe Illustrator"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "A premium footwear brand, built for the future.",
+        body: `Zyphor is a futuristic footwear innovator positioning itself as a premium, tech-forward brand. The website needed to communicate engineering precision, sustainability, and a high-end aesthetic — while converting visitors into buyers.`,
+      },
+      {
+        eyebrow: "The Product Experience",
+        heading: "Making the invisible, visible.",
+        bullets: [
+          "Visualise the 3D-printed lattice sole structure using interactive modelling — demonstrating the technical engineering and breathability of the product.",
+          "Hover-triggered hotspots on the product page to educate users on the sustainable properties of biodegradable TPU materials.",
+          "High-contrast dark mode aesthetic to reinforce the brand's positioning as a premium, futuristic footwear innovator.",
+          "A 'Size Finder' comparison tool to reduce user uncertainty and lower product return rates.",
+        ],
+      },
+      {
+        eyebrow: "Checkout & Payment Flow",
+        heading: "Frictionless from intent to purchase.",
+        bullets: [
+          "Apple Pay and Google Pay express buttons for biometric transaction completion in seconds.",
+          "Sticky 'Quick-Buy' bar on mobile — keeping the primary call-to-action accessible regardless of scroll depth.",
+          "Google Maps Autocomplete on the shipping form — minimising manual data entry and preventing delivery address errors.",
+          "Skeleton loaders during payment processing to reduce perceived wait times and maintain system speed.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "scorehq",
+    title: "ScoreHQ — Sports Broadcasting & Real-time Analytics",
+    subtitle: "UI/UX · Logo Design · Branding · Figma",
+    img: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/dcdb9a247023791.69d1a26d2b697.png",
+    thumb: "https://mir-s3-cdn-cf.behance.net/projects/404/a6e6c2247023791.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png",
+    tags: ["UX/UI", "Product"],
+    year: "2026",
+    role: "UX/UI Designer",
+    tools: ["Figma", "Adobe Illustrator", "Adobe Photoshop"],
+    figmaProto: "https://www.figma.com/proto/yxuhmlegyu3ww31uGf9XkQ/ScoreHQ?node-id=51-5742&page-id=0%3A1&starting-point-node-id=51%3A5742&t=IPuhvzG4dsoWCXxE-1",
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Real-time sports, beautifully designed.",
+        body: `ScoreHQ is a dynamic sports broadcasting and tracking platform designed for the modern fan who demands speed, accuracy, and depth. Whether it's football, basketball, or esports, ScoreHQ provides a seamless experience for monitoring live scores, detailed match events, and the latest sports news.\n\nThe platform is built on the pillars of speed, performance, and trust — ensuring fans never miss a critical moment.`,
+      },
+      {
+        eyebrow: "Design System",
+        heading: "Built for speed and legibility.",
+        body: `The visual language prioritises information density without cognitive overload. A dark base with high-contrast data displays, colour-coded live indicators, and a modular card system that adapts from mobile to large-screen broadcast environments.`,
+      },
+      {
+        eyebrow: "Prototype",
+        heading: "Interactive high-fidelity prototype.",
+        body: `A full Figma prototype was produced covering the core user flows: live match tracking, score browsing, match event detail, and news feed. View the interactive prototype via the link below.`,
+        externalLink: { label: "View Figma Prototype ↗", href: "https://www.figma.com/proto/yxuhmlegyu3ww31uGf9XkQ/ScoreHQ?node-id=51-5742&page-id=0%3A1&starting-point-node-id=51%3A5742&t=IPuhvzG4dsoWCXxE-1" },
+      },
+    ],
+  },
+  {
+    id: "3d-printing",
+    title: "3D Printing",
+    subtitle: "3D Design · Product · Prototyping",
+    img: "images/3d-printing/sq.png",
+    thumb: "images/3d-printing/sq.png",
+    images: [
+      "images/3d-printing/IMG_1124.jpg",
+      "images/3d-printing/IMG_1125.jpg",
+      "images/3d-printing/IMG_1126.jpg",
+      "images/3d-printing/IMG_1127.jpg",
+      "images/3d-printing/IMG_1128.jpg",
+      "images/3d-printing/IMG_1129.jpg",
+      "images/3d-printing/IMG_1130.jpg",
+      "images/3d-printing/IMG_1131.jpg",
+      "images/3d-printing/IMG_1132.jpg",
+      "images/3d-printing/IMG_1133.jpg",
+    ],
+    tags: ["3D", "Product"],
+    year: "2023",
+    role: "Designer",
+    tools: ["Blender", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Dimensional design as a creative medium.",
+        body: `An exploration of 3D printing as both a prototyping method and a standalone creative discipline. This project spans modelling, material experimentation, and visual storytelling — treating the printed object as the final design artefact, not just a functional prototype.`,
+      },
+      {
+        eyebrow: "Process",
+        heading: "From concept to object.",
+        body: `Each piece began as a digital model, refined for printability and aesthetic finish. The workflow involved iterative test prints, surface treatment, and photography to showcase the physical qualities of the output. The result is a body of work that sits at the intersection of industrial design and art.`,
+      },
+    ],
+  },
+  {
+    id: "happy-lab",
+    title: "Happy Lab",
+    subtitle: "Brand Identity · Creative Direction · Visual Language",
+    img: "images/happy-lab/sq.png",
+    thumb: "images/happy-lab/sq.png",
+    images: [
+      "images/happy-lab/happulab_head.png",
+      "images/happy-lab/happulab_behance_01.png",
+      "images/happy-lab/B&W.png",
+      "images/happy-lab/Logo uses 1.png",
+      "images/happy-lab/Logo uses 2.png",
+      "images/happy-lab/Partnerships.png",
+      "images/happy-lab/Partnerships_1.png",
+      "images/happy-lab/happulab_behance_end.png",
+    ],
+    tags: ["Branding", "Creative Direction"],
+    year: "2023",
+    role: "Creative Director",
+    tools: ["Adobe Illustrator", "Adobe Photoshop", "Figma"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Joy as a brand strategy.",
+        body: `Happy Lab required a brand identity that could communicate warmth, playfulness, and accessibility without losing a sense of creative quality. The visual language needed to work across digital, print, and environmental contexts.`,
+      },
+      {
+        eyebrow: "Creative Direction",
+        heading: "Colour, type, and character.",
+        body: `The identity centres on a bold, expressive colour palette and a typographic system that feels energetic but controlled. Character illustration elements were developed to extend the brand into marketing materials and social media, giving Happy Lab a distinctive and memorable visual personality.`,
+      },
+    ],
+  },
+  {
+    id: "purple-mouse",
+    title: "Purple Mouse — 3D Character Design",
+    subtitle: "3D Modelling · Character Design · Rendering",
+    img: "images/purple-mouse/sq.png",
+    thumb: "images/purple-mouse/sq.png",
+    images: [
+      "images/purple-mouse/m1.png",
+      "images/purple-mouse/m2.png",
+      "images/purple-mouse/m3.png",
+    ],
+    tags: ["3D", "Character Design"],
+    year: "2022",
+    role: "3D Designer",
+    tools: ["Blender", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Personality in every polygon.",
+        body: `Purple Mouse is an original 3D character design project — exploring how personality, emotion, and charm can be communicated through form, proportion, and surface detail. The character was sculpted, rigged, and rendered across multiple poses and environments.`,
+      },
+      {
+        eyebrow: "Process",
+        heading: "From sketch to render.",
+        body: `The character began as rough proportion sketches before moving into Blender for modelling. Rigging was developed to allow expressive pose exploration, and the final renders were lit and composited to produce a polished, publication-ready portfolio piece.`,
+      },
+    ],
+  },
+  {
+    id: "unadulterated",
+    title: "UnADULTeRated Art Exhibition 2017",
+    subtitle: "Exhibition Design · Branding · Print",
+    img: "images/unadulterated/Brochure_cover2.png",
+    thumb: "images/unadulterated/Brochure_cover2.png",
+    images: [
+      "images/unadulterated/Brochure_cover2.png",
+    ],
+    tags: ["Exhibition", "Branding"],
+    year: "2017",
+    role: "Designer",
+    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Bold. Typographic. Unapologetic.",
+        body: `UnADULTeRated was an independent art exhibition platform designed to give emerging artists a space to show work without commercial or institutional filters. The visual identity needed to reflect that spirit — raw, energetic, and confident.`,
+      },
+      {
+        eyebrow: "Design Approach",
+        heading: "Typography as the hero.",
+        body: `The identity leans heavily on typographic boldness and compositional tension — using scale, overlap, and contrast to create a system that feels handmade but controlled. Print collateral, posters, and signage were developed across the system.`,
+      },
+    ],
+  },
+  {
+    id: "meditation-poster",
+    title: "Meditation Poster",
+    subtitle: "Print · Illustration · Poster Design",
+    img: "images/meditation-poster/meditation_poster_final.jpg",
+    thumb: "images/meditation-poster/meditation_poster_final.jpg",
+    images: [
+      "images/meditation-poster/meditation_poster_final.jpg",
+    ],
+    tags: ["Print", "Illustration"],
+    year: "2022",
+    role: "Designer & Illustrator",
+    tools: ["Adobe Illustrator", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Stillness as visual language.",
+        body: `A personal project exploring how meditative states can be communicated through visual design. The poster series balances stillness with visual complexity — using negative space, symbolic imagery, and restrained colour to create pieces that reward slow looking.`,
+      },
+      {
+        eyebrow: "Concept",
+        heading: "Negative space as meaning.",
+        body: `Rather than depicting meditation literally, the series uses abstracted forms — geometric shapes, organic curves, and tonal gradients — to evoke the feeling of quietude. Each poster functions independently but reads as part of a coherent whole when shown together.`,
+      },
+    ],
+  },
+  {
+    id: "recipe-app",
+    title: "Recipe App — Scratch — UX Case Study",
+    subtitle: "UX/UI · Mobile · User Research · Prototyping",
+    img: "images/recipe-app/sq.png",
+    thumb: "images/recipe-app/sq.png",
+    images: [
+      "images/recipe-app/scratch_web01.png",
+      "images/recipe-app/scratch_web02.png",
+      "images/recipe-app/scratch_web03.png",
+      "images/recipe-app/scratch_web04.png",
+      "images/recipe-app/scratch_web05.png",
+      "images/recipe-app/scratch_web06.png",
+      "images/recipe-app/chinagarden_web09.png",
+    ],
+    tags: ["UX/UI", "Mobile"],
+    year: "2022",
+    role: "UX Designer",
+    tools: ["Figma", "Miro", "Adobe Illustrator"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Cooking made simple.",
+        body: `Scratch is a concept recipe app designed around the habits of home cooks who want inspiration without friction. The project followed a full UX process — from user research and journey mapping through to wireframes and high-fidelity prototype.`,
+      },
+      {
+        eyebrow: "Research",
+        heading: "Understanding the home cook.",
+        body: `User interviews and diary studies identified key pain points: too many steps before reaching a recipe, poor ingredient substitution support, and no smart shopping list integration. These insights directly shaped the feature prioritisation and information architecture.`,
+      },
+      {
+        eyebrow: "Solution",
+        heading: "Speed to recipe, then depth.",
+        body: `The app's core interaction model surfaces the most relevant recipe immediately — based on available ingredients, dietary preferences, and cooking time. Detail and depth (nutrition, technique videos, substitutions) are layered in progressively, keeping the entry experience clean.`,
+      },
+    ],
+  },
+  {
+    id: "behardwater",
+    title: "Website Design — BeHardWater — UX Case Study",
+    subtitle: "UX/UI · Web Design · Information Architecture",
+    img: "images/behardwater/sq.png",
+    thumb: "images/behardwater/sq.png",
+    images: [
+      "images/behardwater/behardwater_logo01.png",
+      "images/behardwater/behardwater_logo02.png",
+      "images/behardwater/behardwater_web01.png",
+      "images/behardwater/behardwater_web02.png",
+      "images/behardwater/behardwater_web03.png",
+      "images/behardwater/behardwater_web04.png",
+      "images/behardwater/behardwater_web05.png",
+      "images/behardwater/behardwater_web06.png",
+      "images/behardwater/behardwater_web07.png",
+      "images/behardwater/behardwater_web08.png",
+      "images/behardwater/behardwater_web09.png",
+      "images/behardwater/behardwater_web10.png",
+      "images/behardwater/behardwater_web11.png",
+      "images/behardwater/behardwater_web12.png",
+    ],
+    tags: ["UX/UI", "Web Design"],
+    year: "2022",
+    role: "UX Designer",
+    tools: ["Figma", "Miro"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Restructuring for clarity.",
+        body: `BeHardWater is a water filtration product brand whose existing website suffered from unclear navigation, a confusing product range presentation, and a weak conversion path. The brief was to redesign the site to better communicate product value and guide users toward purchase.`,
+      },
+      {
+        eyebrow: "Process",
+        heading: "Audit, research, redesign.",
+        body: `A full heuristic audit of the existing site identified 14 usability issues across navigation, content hierarchy, and the checkout path. User journey mapping revealed that most visitors dropped off at the product detail page — lacking sufficient confidence to add to cart.`,
+      },
+      {
+        eyebrow: "Outcome",
+        heading: "Refined direction, clearer path.",
+        body: `The redesign restructured the information architecture, introduced a comparison table for the product range, and established a cleaner visual direction aligned with the brand's positioning as a premium home wellness product.`,
+      },
+    ],
+  },
+  {
+    id: "food-app",
+    title: "Food App — UX Case Study",
+    subtitle: "UX/UI · Mobile · Food Delivery",
+    img: "images/food-app/sq_chinagarden_v02.jpg",
+    thumb: "images/food-app/sq_chinagarden_v02.jpg",
+    images: [
+      "images/food-app/chinagarden_top01.png",
+      "images/food-app/chinagarden_web02.png",
+      "images/food-app/chinagarden_web03.png",
+      "images/food-app/chinagarden_web04.png",
+      "images/food-app/chinagarden_web05.png",
+      "images/food-app/chinagarden_web06.png",
+      "images/food-app/chinagarden_web07.png",
+      "images/food-app/chinagarden_web08.png",
+      "images/food-app/chinagarden_web09.png",
+      "images/food-app/chinagarden_web10.png",
+    ],
+    tags: ["UX/UI", "Mobile"],
+    year: "2022",
+    role: "UX Designer",
+    tools: ["Figma", "Miro", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Ordering food should feel easy.",
+        body: `A concept-to-prototype UX case study for a food delivery application. The project focused on reducing friction across the ordering journey — from browsing and menu discovery through to checkout and order tracking.`,
+      },
+      {
+        eyebrow: "Key Insights",
+        heading: "Where users get stuck.",
+        bullets: [
+          "Menu browsing is the highest drop-off point — users are overwhelmed by choice without effective filtering.",
+          "Customisation steps in competing apps are confusing and multi-step — a significant source of cart abandonment.",
+          "Order tracking after purchase creates anxiety when progress feels opaque or slow.",
+        ],
+      },
+      {
+        eyebrow: "Design Decisions",
+        heading: "Reducing cognitive load at every step.",
+        body: `The solution introduced a smart filter system that learns from order history, a single-screen customisation interface, and a live tracking view with estimated time prominently displayed. The visual language uses warm tones and generous imagery to keep the experience appetite-stimulating throughout.`,
+      },
+    ],
+  },
+  {
+    id: "mai-po",
+    title: "Mai Po Exhibition — Timeline Board",
+    subtitle: "Exhibition Design · Print · Editorial",
+    img: "images/mai-po/topbanner.jpg",
+    thumb: "images/mai-po/topbanner.jpg",
+    images: [
+      "images/mai-po/topbanner.jpg",
+      "images/mai-po/layout.jpg",
+      "images/mai-po/screen.jpg",
+      "images/mai-po/p01.jpg",
+      "images/mai-po/p02.jpg",
+      "images/mai-po/p03.jpg",
+      "images/mai-po/p04.jpg",
+      "images/mai-po/p05.jpg",
+      "images/mai-po/p06.jpg",
+      "images/mai-po/p07.jpg",
+      "images/mai-po/p08.jpg",
+      "images/mai-po/timeline01.jpg",
+      "images/mai-po/timeline02.jpg",
+      "images/mai-po/timeline03.jpg",
+      "images/mai-po/timeline04.jpg",
+    ],
+    tags: ["Exhibition", "Print"],
+    year: "2022",
+    role: "Designer",
+    tools: ["Adobe InDesign", "Adobe Illustrator", "Adobe Photoshop"],
+    sections: [
+      {
+        eyebrow: "Overview",
+        heading: "Ecological history, made visible.",
+        body: `A timeline board design created for an exhibition about the Mai Po Nature Reserve — a critically important wetland ecosystem in Hong Kong. The project required translating decades of ecological and conservation history into a format that was visually engaging, educationally clear, and appropriate for a public exhibition context.`,
+      },
+      {
+        eyebrow: "Design Approach",
+        heading: "Information meets environment.",
+        body: `The design uses a horizontal timeline structure, illustrated with photographic and typographic elements drawn from the reserve's documented history. Colour is used functionally — distinguishing between ecological milestones, conservation policy changes, and community events — while maintaining a calm, naturalistic palette that echoes the environment itself.`,
+      },
+    ],
+  },
+];
+
+// ── ROUTING ──
+function getProjectId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('p') || PROJECTS[0].id;
+}
+
+function getProjectIndex(id) {
+  return PROJECTS.findIndex(p => p.id === id);
+}
+
+// ── RENDER ──
+function render() {
+  const id = getProjectId();
+  const idx = getProjectIndex(id);
+  const p = PROJECTS[idx] || PROJECTS[0];
+  const prev = PROJECTS[idx - 1] || null;
+  const next = PROJECTS[idx + 1] || null;
+
+  document.title = `${p.title} — Chris Lau`;
+
+  const sectionsHTML = p.sections.map(s => {
+    let inner = '';
+    if (s.body) {
+      inner += `<div class="section-body">${s.body.split('\n\n').map(para => `<p>${para}</p>`).join('')}</div>`;
+    }
+    if (s.bullets) {
+      inner += `<ul class="bullet-list">${s.bullets.map(b => `<li>${b}</li>`).join('')}</ul>`;
+    }
+    if (s.callout) {
+      inner += `<div class="callout"><p>"${s.callout}"</p></div>`;
+    }
+    if (s.externalLink) {
+      inner += `<a href="${s.externalLink.href}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.5rem;font-family:var(--font-display);font-size:0.8rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--black);background:var(--accent);padding:0.8rem 1.6rem;text-decoration:none;">${s.externalLink.label}</a>`;
+    }
+    return `
+      <div class="section">
+        <div class="section-eyebrow">${s.eyebrow}</div>
+        <h2 class="section-heading">${s.heading}</h2>
+        ${inner}
+      </div>`;
+  }).join('');
+
+  const toolsHTML = p.tools.map(t => `<span class="tool-chip">${t}</span>`).join('');
+  const tagsHTML = p.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  const prevHTML = prev
+    ? `<a href="project.html?p=${prev.id}" class="proj-nav-btn prev"><span class="proj-nav-direction">← Previous</span><span class="proj-nav-title">${prev.title}</span></a>`
+    : `<div></div>`;
+  const nextHTML = next
+    ? `<a href="project.html?p=${next.id}" class="proj-nav-btn next"><span class="proj-nav-direction">Next →</span><span class="proj-nav-title">${next.title}</span></a>`
+    : `<div></div>`;
+
+  document.getElementById('page-root').innerHTML = `
+    <div class="project-hero">
+      <img src="${p.img}" alt="${p.title}" class="hero-img">
+    </div>
+    <div class="content">
+      <div class="project-header">
+        <a href="index.html#work" class="back-link">← Back to Work</a>
+        <h1 class="project-title">${p.title}</h1>
+        <div class="project-meta">
+          <div class="tag-row">${tagsHTML}</div>
+          <span class="meta-item"><strong>Role</strong> &nbsp;${p.role}</span>
+          <span class="meta-item"><strong>Year</strong> &nbsp;${p.year}</span>
+        </div>
+        <div class="tools-row" style="margin-top:1.2rem">${toolsHTML}</div>
+      </div>
+
+      ${sectionsHTML}
+
+      <div class="project-nav">
+        ${prevHTML}
+        ${nextHTML}
+      </div>
+    </div>
+  `;
+}
+
+render();
+</script>
+</body>
+</html>

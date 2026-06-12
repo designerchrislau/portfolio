@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chris Lau — Design Leader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* ─── TOKENS ─── */
+  :root {
+    --black: #080808;
+    --off-white: #F0EDE8;
+    --accent: #C8FF00;
+    --mid: #2A2A2A;
+    --grey: #888;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 2.5rem;
+    mix-blend-mode: normal;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--off-white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 2.5rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 11vw, 10rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+    margin-bottom: 2rem;
+  }
+
+  /* Ticker strip */
+  .ticker-wrap {
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 0.75rem 0;
+    margin-bottom: 2.5rem;
+  }
+
+  .ticker-track {
+    display: flex;
+    white-space: nowrap;
+    animation: ticker 18s linear infinite;
+  }
+
+  .ticker-item {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-right: 3rem;
+  }
+
+  .ticker-item span {
+    color: var(--accent);
+    margin-right: 3rem;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .hero-bio {
+    max-width: 520px;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--grey);
+    line-height: 1.7;
+  }
+
+  .hero-bio strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 0.85rem 1.8rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .hero-cta:hover {
+    background: #d4ff26;
+    transform: translateY(-2px);
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* ─── WORK SECTION ─── */
+  #work {
+    padding: 6rem 2.5rem;
+  }
+
+  /* Filter tabs */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-btn {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    color: var(--black);
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* CSS grid — 3 equal columns */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    display: block;
+    background: var(--mid);
+    text-decoration: none;
+  }
+
+  /* Square image container — contain so nothing is cropped */
+  .project-card-img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .project-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: var(--mid);
+  }
+
+  .project-card:hover img {
+    transform: scale(1.04);
+  }
+
+  /* Hover tint over image only */
+  .project-card-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(8,8,8,0.65);
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card:hover .project-card-img-wrap::after {
+    opacity: 1;
+  }
+
+  /* View Project button — sits on top of the ::after overlay */
+  .project-card-cta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 0.7rem 1.3rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .project-card:hover .project-card-cta {
+    opacity: 1;
+  }
+
+  /* Text always visible below the image */
+  .project-info {
+    padding: 0.9rem 1rem 1rem;
+    background: var(--mid);
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--off-white);
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-tag {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ─── ABOUT SECTION ─── */
+  #about {
+    padding: 6rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--off-white);
+    margin-bottom: 2rem;
+  }
+
+  .about-headline em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .about-text {
+    color: var(--grey);
+    font-size: 1rem;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+
+  .about-text p + p { margin-top: 1.2rem; }
+
+  .skills-list {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .skill-item {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--grey);
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-item::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 0.7rem;
+  }
+
+  .about-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .stat-item { border-left: 2px solid var(--accent); padding-left: 1.5rem; }
+
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--off-white);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--grey);
+    margin-top: 0.3rem;
+  }
+
+  .experience-list {
+    margin-top: 3rem;
+  }
+
+  .exp-item {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .exp-role {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--off-white);
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+    color: var(--grey);
+    margin-top: 0.2rem;
+  }
+
+  /* ─── CONTACT SECTION ─── */
+  #contact {
+    padding: 6rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-headline {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--off-white);
+  }
+
+  .contact-headline em {
+    display: block;
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .contact-meta {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-link {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .contact-link:hover { color: var(--accent); }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: var(--mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 0.9rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+  }
+
+  .form-submit {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .form-submit:hover {
+    background: #d4ff26;
+    transform: translateY(-2px);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 2.5rem;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(136,136,136,0.5);
+  }
+
+  /* ─── CMS ADMIN ─── */
+  #cms-toggle {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 200;
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+  }
+
+  #cms-toggle:hover { transform: scale(1.1); }
+
+  #cms-panel {
+    position: fixed;
+    bottom: 5rem;
+    right: 1.5rem;
+    z-index: 200;
+    width: 360px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #111;
+    border: 1px solid rgba(200,255,0,0.3);
+    padding: 1.5rem;
+    display: none;
+  }
+
+  #cms-panel.open { display: block; }
+
+  .cms-title {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+  }
+
+  .cms-section-heading {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin: 1.2rem 0 0.6rem;
+  }
+
+  .cms-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .cms-field label {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(136,136,136,0.7);
+  }
+
+  .cms-field input,
+  .cms-field textarea {
+    background: #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    padding: 0.5rem 0.7rem;
+    outline: none;
+    width: 100%;
+    resize: vertical;
+  }
+
+  .cms-field input:focus,
+  .cms-field textarea:focus { border-color: var(--accent); }
+
+  .cms-btn {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cms-btn-primary { background: var(--accent); color: var(--black); }
+  .cms-btn-secondary { background: transparent; color: var(--grey); border: 1px solid rgba(255,255,255,0.15); }
+  .cms-btn:hover { opacity: 0.8; }
+
+  .cms-project-list { margin-top: 0.5rem; }
+  .cms-project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 0.75rem;
+    color: var(--grey);
+  }
+
+  .cms-project-item button {
+    background: transparent;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cms-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: #0f0f0f;
+    border: 1px solid rgba(255,255,255,0.08);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 3rem;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.5rem; right: 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--grey);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    background: var(--mid);
+  }
+
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+  .modal-tag {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(200,255,0,0.3);
+    padding: 0.3rem 0.7rem;
+  }
+
+  .modal-desc {
+    color: var(--grey);
+    line-height: 1.8;
+    font-size: 0.95rem;
+  }
+
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.8rem;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--accent);
+    padding: 0.8rem 1.6rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .modal-link:hover {
+    background: #d4ff26;
+    transform: translateY(-2px);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .skills-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .hero { padding: 0 1.2rem 4rem; }
+    #work, #about, #contact { padding: 4rem 1.2rem; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    #cms-panel { width: calc(100vw - 3rem); right: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
+    .project-card img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">Chris Lau</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">Available for Freelance & Full-time · London</div>
+  <h1 class="hero-name" id="hero-name">Chris<br>Lau</h1>
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="ticker-track">
+      <!-- filled by JS -->
+    </div>
+  </div>
+  <p class="hero-bio" id="hero-bio">
+    <strong>Multidisciplinary Design Leader</strong> specialising in the full creative lifecycle — from brand identity to user interfaces. Helping startups find their voice and build their products.
+  </p>
+  <a href="#work" class="hero-cta">View Work ↓</a>
+</section>
+
+<!-- ── WORK ── -->
+<section id="work">
+  <div class="section-label">Selected Work</div>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-filter="all">All</button>
+  </div>
+
+  <div class="projects-grid" id="projects-grid">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-headline">Design that <em>moves</em> business forward.</h2>
+      <div class="about-text" id="about-text">
+        <p>I'm a Design Leader with over a decade of experience helping startups and scale-ups build cohesive identities, ship great products, and connect with their audiences.</p>
+        <p>I specialise across the full creative stack — UX/UI, brand strategy, AI-generated visual production, and event design. My approach is always rooted in clarity: beautiful work that earns its place.</p>
+        <p>Currently <strong style="color:var(--off-white)">Design Lead at Loothub</strong> and running my own studio, <strong style="color:var(--off-white)">Zyphor</strong>, in London.</p>
+      </div>
+      <div class="skills-list">
+        <div class="skill-item">UX / UI Design</div>
+        <div class="skill-item">Brand Identity</div>
+        <div class="skill-item">AI Visual Production</div>
+        <div class="skill-item">Video & Motion</div>
+        <div class="skill-item">Design Systems</div>
+        <div class="skill-item">Creative Direction</div>
+        <div class="skill-item">Event Design</div>
+        <div class="skill-item">Web Development</div>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Years of design experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Brands & products launched</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Disciplines: UX · Brand · AI</div>
+      </div>
+      <div class="experience-list">
+        <div class="exp-item">
+          <div class="exp-role">Design Lead</div>
+          <div class="exp-company">Loothub — London</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">UX/UI Designer</div>
+          <div class="exp-company">Reclaim My Money — London</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">UX/UI Designer</div>
+          <div class="exp-company">Join Momentum — London</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-headline">Let's make<br>something <em>great.</em></h2>
+      <div class="contact-meta">
+        <a href="mailto:designerchrislau@gmail.com" class="contact-link">↗ designerchrislau@gmail.com</a>
+        <a href="https://linkedin.com/in/designerchrislau" target="_blank" class="contact-link">↗ LinkedIn</a>
+        <a href="https://www.behance.net/designerchrislau" target="_blank" class="contact-link">↗ Behance</a>
+        <a href="http://facebook.com/wowchris" target="_blank" class="contact-link">↗ Facebook</a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="jane@company.com">
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Tell me about your project…"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Send Message →</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-name">Chris Lau</span>
+  <span class="footer-copy">© 2025 Chris Lau. All rights reserved.</span>
+</footer>
+
+<!-- ── CMS TOGGLE ── -->
+<button id="cms-toggle" title="Edit site" onclick="toggleCMS()">✏</button>
+
+<!-- ── CMS PANEL ── -->
+<div id="cms-panel">
+  <div class="cms-title">⚡ Site CMS</div>
+
+  <div class="cms-section-heading">Hero</div>
+  <div class="cms-field">
+    <label>Name</label>
+    <input id="cms-name" type="text">
+  </div>
+  <div class="cms-field">
+    <label>Bio</label>
+    <textarea id="cms-bio" rows="3"></textarea>
+  </div>
+  <div class="cms-field">
+    <label>Ticker disciplines (comma-separated)</label>
+    <input id="cms-ticker" type="text">
+  </div>
+
+  <div class="cms-section-heading">Add Project</div>
+  <div class="cms-field">
+    <label>Title</label>
+    <input id="new-title" type="text" placeholder="Project name">
+  </div>
+  <div class="cms-field">
+    <label>Image URL</label>
+    <input id="new-img" type="text" placeholder="https://…">
+  </div>
+  <div class="cms-field">
+    <label>Tags (comma-separated)</label>
+    <input id="new-tags" type="text" placeholder="UX/UI, Branding">
+  </div>
+  <div class="cms-field">
+    <label>Project URL (optional)</label>
+    <input id="new-url" type="text" placeholder="https://behance.net/…">
+  </div>
+  <div class="cms-field">
+    <label>Description</label>
+    <textarea id="new-desc" rows="3" placeholder="Project description…"></textarea>
+  </div>
+  <button class="cms-btn cms-btn-primary" onclick="addProject()">+ Add Project</button>
+
+  <div class="cms-section-heading">Projects</div>
+  <div class="cms-project-list" id="cms-project-list"></div>
+
+  <div class="cms-actions">
+    <button class="cms-btn cms-btn-primary" onclick="applyChanges()">Apply Changes</button>
+    <button class="cms-btn cms-btn-secondary" onclick="resetData()">Reset</button>
+  </div>
+</div>
+
+<!-- ── PROJECT MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <img id="modal-img" src="" alt="" class="modal-img">
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-tags" id="modal-tags"></div>
+    <p class="modal-desc" id="modal-desc"></p>
+    <a id="modal-link" href="#" class="modal-link">View Case Study →</a>
+  </div>
+</div>
+
+<script>
+// ─── DEFAULT DATA ───
+const DEFAULT_DATA = {
+  name: "Chris\nLau",
+  bio: "<strong>Multidisciplinary Design Leader</strong> specialising in the full creative lifecycle — from brand identity to user interfaces. Helping startups find their voice and build their products.",
+  ticker: ["UX/UI Design", "Brand Identity", "AI Production", "Video & Motion", "Design Systems", "Creative Direction"],
+  projects: [
+    { id: "christmas-campaign", title: "Christmas Campaign — AI Visual Production", img: "https://mir-s3-cdn-cf.behance.net/projects/404/f761c8249146175.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png", tags: ["AI Production", "Branding"], desc: "AI-generated visual production for a festive campaign — exploring the frontier of generative imagery in commercial creative work.", url: "project.html?p=christmas-campaign" },
+    { id: "zyphor-website", title: "Zyphor Website", img: "https://mir-s3-cdn-cf.behance.net/projects/404/08f165247773297.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png", tags: ["UX/UI", "Web Design"], desc: "Full website design and development for Zyphor — a design studio built around clarity and creative precision.", url: "project.html?p=zyphor-website" },
+    { id: "scorehq", title: "ScoreHQ — Sports Broadcasting & Real-time Analytics", img: "https://mir-s3-cdn-cf.behance.net/projects/404/a6e6c2247023791.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png", tags: ["UX/UI", "Product"], desc: "Product design for a sports broadcasting platform with live scores, real-time analytics dashboards, and broadcast-quality visuals.", url: "project.html?p=scorehq" },
+    { id: "3d-printing", title: "3D Printing", img: "https://mir-s3-cdn-cf.behance.net/projects/404/5bfc2a210223517.Y3JvcCwxOTY0LDE1MzYsMCw1OA.png", tags: ["3D", "Product"], desc: "Exploration of 3D printing as a creative medium — modelling, prototyping and visual storytelling through dimensional design.", url: "project.html?p=3d-printing" },
+    { id: "happy-lab", title: "Happy Lab", img: "https://mir-s3-cdn-cf.behance.net/projects/404/b5063e209415473.Y3JvcCwxOTY0LDE1MzYsMCwzNA.png", tags: ["Branding", "Creative Direction"], desc: "Brand identity and visual language for Happy Lab — playful, vibrant and built for an audience that values joy.", url: "project.html?p=happy-lab" },
+    { id: "purple-mouse", title: "Purple Mouse — 3D Character Design", img: "https://mir-s3-cdn-cf.behance.net/projects/404/bf95ed177067327.Y3JvcCwxMDI0LDgwMCwwLDE3.png", tags: ["3D", "Character Design"], desc: "Original 3D character design — sculpted, rigged and rendered with personality and charm at every angle.", url: "project.html?p=purple-mouse" },
+    { id: "unadulterated", title: "UnADULTeRated Art Exhibition 2017", img: "https://mir-s3-cdn-cf.behance.net/projects/404/333302164819009.Y3JvcCwxOTIwLDE1MDEsMCwzNTY.png", tags: ["Exhibition", "Branding"], desc: "Visual identity and collateral design for the UnADULTeRated art exhibition — bold, typographic and unapologetically expressive.", url: "project.html?p=unadulterated" },
+    { id: "meditation-poster", title: "Meditation Poster", img: "https://mir-s3-cdn-cf.behance.net/projects/404/88e71c164814181.Y3JvcCwxMDI0LDgwMCwwLDA.jpg", tags: ["Print", "Illustration"], desc: "A meditative poster series balancing stillness and visual complexity — a study in negative space and symbolic imagery.", url: "project.html?p=meditation-poster" },
+    { id: "recipe-app", title: "Recipe App — Scratch — UX Case Study", img: "https://mir-s3-cdn-cf.behance.net/projects/404/2dcb86149412367.Y3JvcCwxMDI0LDgwMCwwLDE3.png", tags: ["UX/UI", "Mobile"], desc: "End-to-end UX case study for Scratch, a recipe app designed for home cooks — from user research to high-fidelity prototypes.", url: "project.html?p=recipe-app" },
+    { id: "behardwater", title: "Website Design — BeHardWater — UX Case Study", img: "https://mir-s3-cdn-cf.behance.net/projects/404/71969f149397305.Y3JvcCwxMDI0LDgwMCwwLDE3.png", tags: ["UX/UI", "Web Design"], desc: "UX redesign for BeHardWater — mapping user journeys, restructuring information architecture, and delivering a refined visual direction.", url: "project.html?p=behardwater" },
+    { id: "food-app", title: "Food App — UX Case Study", img: "https://mir-s3-cdn-cf.behance.net/projects/404/adf118149389923.Y3JvcCwxMDI0LDgwMCwwLDMw.png", tags: ["UX/UI", "Mobile"], desc: "Concept-to-prototype UX case study for a food delivery app — focused on reducing friction and elevating the ordering experience.", url: "project.html?p=food-app" },
+    { id: "mai-po", title: "Mai Po Exhibition — Timeline Board", img: "https://mir-s3-cdn-cf.behance.net/projects/404/6b88d6146774207.Y3JvcCwxMjM3LDk2Nyw3ODEsMA.jpg", tags: ["Exhibition", "Print"], desc: "Exhibition timeline board for the Mai Po Nature Reserve — an editorial design bringing ecological history to life.", url: "project.html?p=mai-po" }
+  ]
+};
+
+// ─── STATE ───
+let siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+let activeFilter = 'all';
+
+// ─── INIT ───
+function init() {
+  renderHero();
+  renderTicker();
+  renderFilterBar();
+  renderProjects();
+  populateCMS();
+}
+
+function renderHero() {
+  document.getElementById('hero-bio').innerHTML = siteData.bio;
+}
+
+function renderTicker() {
+  const items = siteData.ticker;
+  const doubled = [...items, ...items]; // loop seamlessly
+  const track = document.getElementById('ticker-track');
+  track.innerHTML = doubled.map((t, i) =>
+    `<span class="ticker-item">${t}<span>·</span></span>`
+  ).join('');
+}
+
+function renderFilterBar() {
+  const tags = new Set(['all']);
+  siteData.projects.forEach(p => p.tags.forEach(t => tags.add(t)));
+  const bar = document.getElementById('filter-bar');
+  bar.innerHTML = [...tags].map(t =>
+    `<button class="filter-btn ${activeFilter === t ? 'active' : ''}" data-filter="${t}" onclick="setFilter('${t}')">${t}</button>`
+  ).join('');
+}
+
+function setFilter(tag) {
+  activeFilter = tag;
+  renderFilterBar();
+  renderProjects();
+}
+
+function renderProjects() {
+  const grid = document.getElementById('projects-grid');
+  const filtered = activeFilter === 'all'
+    ? siteData.projects
+    : siteData.projects.filter(p => p.tags.includes(activeFilter));
+
+  grid.innerHTML = filtered.map((p) => {
+    const realIdx = siteData.projects.indexOf(p);
+    const href = p.url || '#';
+    return `
+    <a class="project-card" href="${href}">
+      <div class="project-card-img-wrap">
+        <img src="${p.img}" alt="${p.title}" loading="lazy">
+        <span class="project-card-cta">View Project →</span>
+      </div>
+      <div class="project-info">
+        <div class="project-title">${p.title}</div>
+        <div class="project-tags">
+          ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join(' · ')}
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+// ─── MODAL ───
+function openModal(index) {
+  const p = siteData.projects[index];
+  document.getElementById('modal-img').src = p.img;
+  document.getElementById('modal-img').alt = p.title;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t =>
+    `<span class="modal-tag">${t}</span>`
+  ).join('');
+  document.getElementById('modal-desc').textContent = p.desc;
+  const link = document.getElementById('modal-link');
+  if (p.url) {
+    link.href = p.url;
+    link.style.display = 'inline-flex';
+  } else {
+    link.style.display = 'none';
+  }
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal') || e.target.classList.contains('modal-close')) {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal({ target: document.getElementById('modal') });
+});
+
+// ─── CMS ───
+function toggleCMS() {
+  document.getElementById('cms-panel').classList.toggle('open');
+}
+
+function populateCMS() {
+  document.getElementById('cms-name').value = siteData.name.replace('\n', ' ');
+  document.getElementById('cms-bio').value = siteData.bio.replace(/<[^>]+>/g, '');
+  document.getElementById('cms-ticker').value = siteData.ticker.join(', ');
+  renderCMSProjectList();
+}
+
+function renderCMSProjectList() {
+  const list = document.getElementById('cms-project-list');
+  list.innerHTML = siteData.projects.map((p, i) => `
+    <div class="cms-project-item">
+      <span>${p.title.substring(0, 30)}…</span>
+      <button onclick="removeProject(${i})">Remove</button>
+    </div>
+  `).join('');
+}
+
+function addProject() {
+  const title = document.getElementById('new-title').value.trim();
+  const img = document.getElementById('new-img').value.trim();
+  const tags = document.getElementById('new-tags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const url = document.getElementById('new-url').value.trim();
+  const desc = document.getElementById('new-desc').value.trim();
+  if (!title) return alert('Please enter a project title.');
+  siteData.projects.push({ title, img: img || '', tags, desc, url });
+  document.getElementById('new-title').value = '';
+  document.getElementById('new-img').value = '';
+  document.getElementById('new-tags').value = '';
+  document.getElementById('new-url').value = '';
+  document.getElementById('new-desc').value = '';
+  renderCMSProjectList();
+  renderFilterBar();
+  renderProjects();
+}
+
+function removeProject(index) {
+  siteData.projects.splice(index, 1);
+  renderCMSProjectList();
+  renderFilterBar();
+  renderProjects();
+}
+
+function applyChanges() {
+  const name = document.getElementById('cms-name').value.trim();
+  const bio = document.getElementById('cms-bio').value.trim();
+  const ticker = document.getElementById('cms-ticker').value.split(',').map(t => t.trim()).filter(Boolean);
+  if (name) siteData.name = name;
+  if (bio) siteData.bio = bio;
+  if (ticker.length) siteData.ticker = ticker;
+  renderHero();
+  renderTicker();
+  renderFilterBar();
+  renderProjects();
+  alert('Changes applied!');
+}
+
+function resetData() {
+  siteData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+  init();
+  alert('Reset to default.');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  alert('Thanks for your message! Chris will be in touch soon.');
+  e.target.reset();
+}
+
+init();
+</script>
+</body>
+</html>
